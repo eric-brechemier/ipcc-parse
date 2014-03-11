@@ -45,7 +45,7 @@
           <record>
             <xsl:analyze-string
               select="."
-              regex='("([^"]*?)")|([^,]+?),'
+              regex='("([^"]*?)")|([^,]+?)(,|$)'
             >
               <xsl:matching-substring>
                 <field>
