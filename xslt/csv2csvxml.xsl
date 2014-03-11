@@ -6,10 +6,10 @@
   version="2.0"
 >
 
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
   <xsl:param name="csv" as="xs:string"/>
   <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
-
-  <xsl:output indent="yes"/>
 
   <xsl:template name="main" match="/">
     <xsl:variable
