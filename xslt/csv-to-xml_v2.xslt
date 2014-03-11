@@ -48,36 +48,29 @@
   </xsl:function>
 
   <xsl:template match="/" name="main">
-    <xsl:choose>
-      <xsl:when test="unparsed-text-available($csv)">
-        <xsl:variable name="csvText" select="unparsed-text($csv, $encoding)"/>
-        <xsl:variable name="lines" as="xs:string+"
-          select="tokenize($csvText, '&#xa;')"
-        />
-        <xsl:variable name="elemNames" as="xs:string+"
-          select="fn:getTokens($lines[1])"
-        />
-        <root>
-          <xsl:for-each select="$lines[position() > 1]">
-            <row>
-              <xsl:variable name="lineItems" as="xs:string+"
-                select="fn:getTokens(.)"
-              />
+    <xsl:variable name="csvText" select="unparsed-text($csv, $encoding)"/>
+    <xsl:variable name="lines" as="xs:string+"
+      select="tokenize($csvText, '&#xa;')"
+    />
+    <xsl:variable name="elemNames" as="xs:string+"
+      select="fn:getTokens($lines[1])"
+    />
+    <root>
+      <xsl:for-each select="$lines[position() > 1]">
+        <row>
+          <xsl:variable name="lineItems" as="xs:string+"
+            select="fn:getTokens(.)"
+          />
 
-              <xsl:for-each select="$elemNames">
-                <xsl:variable name="pos" select="position()"/>
-                <elem name="{.}">
-                  <xsl:value-of select="$lineItems[$pos]"/>
-                </elem>
-              </xsl:for-each>
-            </row>
+          <xsl:for-each select="$elemNames">
+            <xsl:variable name="pos" select="position()"/>
+            <elem name="{.}">
+              <xsl:value-of select="$lineItems[$pos]"/>
+            </elem>
           </xsl:for-each>
-        </root>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:text>Cannot locate : </xsl:text><xsl:value-of select="$csv"/>
-      </xsl:otherwise>
-    </xsl:choose>
+        </row>
+      </xsl:for-each>
+    </root>
   </xsl:template>
 
 </xsl:stylesheet>
