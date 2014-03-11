@@ -57,6 +57,13 @@
       select="csv:getFields($lines[1])"
     />
     <records>
+      <header>
+        <xsl:for-each select="$fieldNames">
+          <field>
+            <xsl:value-of select="."/>
+          </field>
+        </xsl:for-each>
+      </header>
       <xsl:for-each select="$lines[position() > 1]">
         <record>
           <xsl:variable name="lineItems" as="xs:string+"
