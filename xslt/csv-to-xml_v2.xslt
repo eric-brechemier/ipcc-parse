@@ -57,13 +57,13 @@
       select="csv:getFields($records[1])"
     />
     <records>
-      <header>
+      <record type="header">
         <xsl:for-each select="$fieldNames">
           <field>
             <xsl:value-of select="."/>
           </field>
         </xsl:for-each>
-      </header>
+      </record>
       <xsl:for-each select="$records[position() > 1]">
         <record>
           <xsl:variable name="fields" as="xs:string+"
