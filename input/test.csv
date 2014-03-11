@@ -1,5 +1,5 @@
 column1,column_2,Column 3,"Column 4"
-1,two,"Value ""Three"" quoted","Value Four"
+1,two,"Value ""Three"": 1, 2, 3","Value Four"
 A2,B2,C2,D2
 ,,,
 "","","",""
