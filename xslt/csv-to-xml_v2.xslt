@@ -71,9 +71,9 @@
           />
 
           <xsl:for-each select="$fieldNames">
-            <xsl:variable name="pos" select="position()"/>
+            <xsl:variable name="fieldPosition" select="position()"/>
             <field name="{.}">
-              <xsl:value-of select="$lineItems[$pos]"/>
+              <xsl:value-of select="$lineItems[$fieldPosition]"/>
             </field>
           </xsl:for-each>
         </record>
