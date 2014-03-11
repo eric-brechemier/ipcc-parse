@@ -31,6 +31,7 @@
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
   <xsl:param name="csv" as="xs:string"/>
+  <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
 
   <xsl:function name="fn:getTokens" as="xs:string+">
     <xsl:param name="str" as="xs:string"/>
@@ -49,7 +50,7 @@
   <xsl:template match="/" name="main">
     <xsl:choose>
       <xsl:when test="unparsed-text-available($csv)">
-        <xsl:variable name="csvText" select="unparsed-text($csv)"/>
+        <xsl:variable name="csvText" select="unparsed-text($csv, $encoding)"/>
         <xsl:variable name="lines" as="xs:string+"
           select="tokenize($csvText, '&#xa;')"
         />
