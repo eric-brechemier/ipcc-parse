@@ -10,7 +10,7 @@
 
   <xsl:output indent="yes"/>
 
-  <xsl:template name="main">
+  <xsl:template name="main" match="/">
     <xsl:variable
       name="csvText"
       select="unparsed-text($csv, $encoding)"
