@@ -53,7 +53,7 @@
     <xsl:variable name="lines" as="xs:string+"
       select="tokenize($csvText, '&#xa;')"
     />
-    <xsl:variable name="elemNames" as="xs:string+"
+    <xsl:variable name="fieldNames" as="xs:string+"
       select="fn:getTokens($lines[1])"
     />
     <records>
@@ -63,7 +63,7 @@
             select="fn:getTokens(.)"
           />
 
-          <xsl:for-each select="$elemNames">
+          <xsl:for-each select="$fieldNames">
             <xsl:variable name="pos" select="position()"/>
             <field name="{.}">
               <xsl:value-of select="$lineItems[$pos]"/>
