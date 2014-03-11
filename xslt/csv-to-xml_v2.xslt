@@ -49,9 +49,9 @@
   <xsl:template match="/" name="main">
     <xsl:choose>
       <xsl:when test="unparsed-text-available($pathToCSV)">
-        <xsl:variable name="csv" select="unparsed-text($pathToCSV)"/>
+        <xsl:variable name="csvText" select="unparsed-text($pathToCSV)"/>
         <xsl:variable name="lines" as="xs:string+"
-          select="tokenize($csv, '&#xa;')"
+          select="tokenize($csvText, '&#xa;')"
         />
         <xsl:variable name="elemNames" as="xs:string+"
           select="fn:getTokens($lines[1])"
