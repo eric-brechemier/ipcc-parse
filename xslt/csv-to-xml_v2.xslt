@@ -30,7 +30,7 @@
 
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
-  <xsl:param name="csv" as="xs:string"/>
+  <xsl:param name="pathToCSV" select="'file:///c:/csv.csv'"/>
 
   <xsl:function name="fn:getTokens" as="xs:string+">
     <xsl:param name="str" as="xs:string"/>
@@ -48,8 +48,8 @@
 
   <xsl:template match="/" name="main">
     <xsl:choose>
-      <xsl:when test="unparsed-text-available($csv)">
-        <xsl:variable name="csv" select="unparsed-text($csv)"/>
+      <xsl:when test="unparsed-text-available($pathToCSV)">
+        <xsl:variable name="csv" select="unparsed-text($pathToCSV)"/>
         <xsl:variable name="lines" as="xs:string+"
           select="tokenize($csv, '&#xa;')"
         />
@@ -74,7 +74,7 @@
         </root>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:text>Cannot locate : </xsl:text><xsl:value-of select="$csv"/>
+        <xsl:text>Cannot locate : </xsl:text><xsl:value-of select="$pathToCSV"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
