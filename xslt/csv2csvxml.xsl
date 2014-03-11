@@ -13,12 +13,6 @@
   WARNING: at this point, this conversion does not support escaping
   of double quotes within quoted values, e.g., "escaped "" in quoted value".
 
-  WARNING: at this point, this conversion does not support unquoted
-  empty values, for example:
-  ,,,
-  is expected as
-  "","","",""
-
   Input: Any XML (e.g., the stylesheet itself)
   Input Parameters:
     * csv - string, path to the input CSV file,
@@ -56,25 +50,24 @@
             TODO: allow escaping of double quotes within quoted values,
             e.g., "escaped "" in quoted value".
             -->
-            <!--
-            TODO: add support for unquoted empty values, at start, middle
-            and end of the record. Regular expressions may no longer be
-            the right tool at this point, since regular expressions which
-            match an empty string are not allowed to avoid infinite recursion.
-            Also, regular expressions do not provide any way to check that the
-            number of fields matches the number of columns in the first row.
-            -->
             <xsl:analyze-string
               select="."
-              regex='("([^"]*?)")|([^,]+?)(,|$)'
+              regex='("([^"]*?)"(,|$))|(([^,]*),)|(([^,]+?)$)'
             >
               <xsl:matching-substring>
                 <field>
                    <xsl:value-of select="regex-group(2)" />
-                   <xsl:value-of select="regex-group(3)" />
+                   <xsl:value-of select="regex-group(5)" />
+                   <xsl:value-of select="regex-group(7)" />
                 </field>
               </xsl:matching-substring>
             </xsl:analyze-string>
+            <xsl:if test="ends-with(.,',')">
+              <!-- the regular expression cannot match an unquoted empty field
+              in last position, because regular expression which may match an
+              empty string are forbidden by the XSLT2 specification -->
+              <field />
+            </xsl:if>
           </record>
         </xsl:non-matching-substring>
       </xsl:analyze-string>
