@@ -6,13 +6,14 @@
 >
 
   <xsl:param name="csv" as="xs:string"/>
+  <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
 
   <xsl:output indent="yes"/>
 
   <xsl:template name="main">
     <xsl:variable
       name="in"
-      select="unparsed-text($csv, 'iso-8859-1')"
+      select="unparsed-text($csv, $encoding)"
     />
     <table>
       <xsl:analyze-string select="$in" regex="\n">
