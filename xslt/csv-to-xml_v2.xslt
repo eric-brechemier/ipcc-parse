@@ -1,20 +1,32 @@
 <?xml version="1.0"?>
-<!--
-  A CSV to XML transform
-  Version 2
-  Andrew Welch
-  http://andrewjwelch.com
-
-  Modify or supply the $pathToCSV parameter and run the transform
-  using "main" as the initial template.
-
-  For bug reports or modification requests contact me at andrew.j.welch@gmail.com
--->
 <xsl:stylesheet version="2.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:fn="fn"
   exclude-result-prefixes="xs fn">
+
+  <!--
+  Convert a text file in Comma-Separated Format (CSV)
+  to a similar structure in XML format
+
+  Input: Any XML (e.g., the stylesheet itself)
+  Input Parameters:
+    * csv - string, path to the input CSV file,
+            absolute or relative to the stylesheet
+    * encoding - optional, string, character encoding of the input CSV file,
+                 defaults to 'UTF-8'
+
+  Output: XML format with a structure similar to CSV
+
+  This stylesheet is adapted from:
+  "A CSV to XML converter in XSLT 2.0", by Andrew Welch
+  http://andrewjwelch.com/code/xslt/csv/csv-to-xml_v2.html
+
+  For the modified stylesheet,
+  Author: Eric Bréchemier
+  License: http://creativecommons.org/licenses/by/4.0/
+  Version: 2014-03-11
+  -->
 
   <xsl:output indent="yes" encoding="US-ASCII"/>
 
