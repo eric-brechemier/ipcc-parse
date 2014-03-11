@@ -3,8 +3,8 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns="http://eric.brechemier.name#csv"
-  xmlns:fn="fn"
-  exclude-result-prefixes="xs fn">
+  xmlns:csv="http://eric.brechemier.name#csv"
+  exclude-result-prefixes="xs csv">
 
   <!--
   Convert a text file in Comma-Separated Format (CSV)
@@ -34,7 +34,7 @@
   <xsl:param name="csv" as="xs:string"/>
   <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
 
-  <xsl:function name="fn:getTokens" as="xs:string+">
+  <xsl:function name="csv:getTokens" as="xs:string+">
     <xsl:param name="str" as="xs:string"/>
       <xsl:analyze-string
         select="concat($str, ',')"
@@ -54,13 +54,13 @@
       select="tokenize($csvText, '&#xa;')"
     />
     <xsl:variable name="fieldNames" as="xs:string+"
-      select="fn:getTokens($lines[1])"
+      select="csv:getTokens($lines[1])"
     />
     <records>
       <xsl:for-each select="$lines[position() > 1]">
         <record>
           <xsl:variable name="lineItems" as="xs:string+"
-            select="fn:getTokens(.)"
+            select="csv:getTokens(.)"
           />
 
           <xsl:for-each select="$fieldNames">
