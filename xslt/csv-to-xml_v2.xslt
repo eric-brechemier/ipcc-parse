@@ -66,14 +66,14 @@
       </header>
       <xsl:for-each select="$lines[position() > 1]">
         <record>
-          <xsl:variable name="lineItems" as="xs:string+"
+          <xsl:variable name="fields" as="xs:string+"
             select="csv:getFields(.)"
           />
 
           <xsl:for-each select="$fieldNames">
             <xsl:variable name="fieldPosition" select="position()"/>
             <field name="{.}">
-              <xsl:value-of select="$lineItems[$fieldPosition]"/>
+              <xsl:value-of select="$fields[$fieldPosition]"/>
             </field>
           </xsl:for-each>
         </record>
