@@ -50,11 +50,11 @@
 
   <xsl:template match="/" name="main">
     <xsl:variable name="csvText" select="unparsed-text($csv, $encoding)"/>
-    <xsl:variable name="lines" as="xs:string+"
+    <xsl:variable name="records" as="xs:string+"
       select="tokenize($csvText, '&#xa;')"
     />
     <xsl:variable name="fieldNames" as="xs:string+"
-      select="csv:getFields($lines[1])"
+      select="csv:getFields($records[1])"
     />
     <records>
       <header>
@@ -64,7 +64,7 @@
           </field>
         </xsl:for-each>
       </header>
-      <xsl:for-each select="$lines[position() > 1]">
+      <xsl:for-each select="$records[position() > 1]">
         <record>
           <xsl:variable name="fields" as="xs:string+"
             select="csv:getFields(.)"
