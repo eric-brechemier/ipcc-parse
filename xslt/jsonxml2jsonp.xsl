@@ -91,7 +91,7 @@
 
   <xsl:template match="json:string">
     <xsl:text>"</xsl:text>
-    <xsl:value-of select="." />
+    <xsl:value-of select='replace(.,"""","\\""")' />
     <xsl:text>"</xsl:text>
   </xsl:template>
 
