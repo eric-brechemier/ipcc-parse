@@ -23,7 +23,7 @@
   <property name="parsing.log.file" value="log.txt" />
 
   <!-- character set of input CSV data -->
-  <property name="input.encoding" value="UTF-8" />
+  <property name="input.csv.encoding" value="UTF-8" />
 
   <!-- relative path to input CSV data -->
   <property name="input.csv" value="input/test.csv" />
@@ -75,8 +75,8 @@
            out="${output.dir}/csv.xml"
     >
       <args>
-        <arg line="encoding=${input.encoding}" />
-        <arg line="csv=${input.location}" />
+        <arg line="encoding=${input.csv.encoding}" />
+        <arg line="csv=${input.csv.location}" />
       </args>
     </saxon>
   </target>
