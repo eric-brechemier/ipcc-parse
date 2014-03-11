@@ -1,5 +1,8 @@
 # ignore generated output folder
 output/
 
+# ignore user property file
+ant/user.properties
+
 # ignore parsing log
 log.txt
