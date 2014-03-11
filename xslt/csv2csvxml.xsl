@@ -5,13 +5,14 @@
   version="2.0"
 >
 
-  <xsl:param name="input-uri" as="xs:string"/>
+  <xsl:param name="csv" as="xs:string"/>
+
   <xsl:output indent="yes"/>
 
   <xsl:template name="main">
     <xsl:variable
       name="in"
-      select="unparsed-text($input-uri, 'iso-8859-1')"
+      select="unparsed-text($csv, 'iso-8859-1')"
     />
     <table>
       <xsl:analyze-string select="$in" regex="\n">
