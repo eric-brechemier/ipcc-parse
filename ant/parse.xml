@@ -36,11 +36,15 @@
   <property name="jsonp.start" value="jsonp(" />
   <property name="jsonp.end" value=");" />
 
+  <!-- relative path for export of the JSONP script -->
+  <!-- Note: no export is performed with this default value -->
+  <property name="export.jsonp" value="output/jsonp.js" />
+
   <import file="macros.xml" />
 
   <target name="parse"
     description="Parse and convert CSV to JSON for GIEC tool"
-    depends="init, csv2csvxml, csvxml2jsonxml, jsonxml2jsonp, success"
+    depends="init, csv2csvxml, csvxml2jsonxml, jsonxml2jsonp, export, success"
   />
 
   <target name="log" if="parsing.log"
@@ -102,6 +106,12 @@
         <arg line="wrapperEnd='${jsonp.end}'" />
       </args>
     </saxon>
+  </target>
+
+  <target name="export" depends="log"
+    description="Export the output JSONP script"
+  >
+    <copy file="${output.dir}/jsonp.js" tofile="${export.jsonp}" />
   </target>
 
 </project>
