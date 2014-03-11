@@ -5,7 +5,29 @@
   exclude-result-prefixes="xs"
   version="2.0"
 >
+  <!--
+  Convert a text file in Comma-Separated Format (CSV)
+  to a similar structure in XML format
 
+  Input: Any XML (e.g., the stylesheet itself)
+  Input Parameters:
+    * csv - string, path to the input CSV file,
+            absolute or relative to the stylesheet
+    * encoding - optional, string, character encoding of the input CSV file,
+                 defaults to 'UTF-8'
+
+  Output: XML format with a structure similar to CSV
+
+  This stylesheet is adapted from the example
+  "Processing a Comma-Separated-Values File", p.907-908,
+  in the book "XSLT 2.0 and XPath 2.0, 4th Edition",
+  by Michael Kay
+
+  For the modified stylesheet,
+  Author: Eric Bréchemier
+  License: http://creativecommons.org/licenses/by/4.0/
+  Version: 2014-03-11
+  -->
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
   <xsl:param name="csv" as="xs:string"/>
