@@ -35,9 +35,9 @@
   <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
 
   <xsl:function name="csv:getFields" as="xs:string+">
-    <xsl:param name="str" as="xs:string"/>
+    <xsl:param name="record" as="xs:string"/>
       <xsl:analyze-string
-        select="concat($str, ',')"
+        select="concat($record, ',')"
         regex='(("[^"]*")+|[^,]*),'
       >
         <xsl:matching-substring>
