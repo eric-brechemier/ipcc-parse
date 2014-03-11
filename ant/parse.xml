@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="giec.parse" basedir=".." default="parse">
+  <!--
+    Ant script to parse and convert data for GIEC tool
+
+    Adapted from:
+    "Build script to generate optimized pages for mangaconseil.com"
+
+    Author: Eric Bréchemier
+    License: http://creativecommons.org/licenses/by/4.0/
+    Version: 2014-03-11
+  -->
+
+  <!-- override defaults locally -->
+  <property file="ant/user.properties" />
+
+  <!-- list of parameters used, with default values -->
+
+  <!-- whether logging of parsing messages is enabled: on|off -->
+  <property name="parsing.log" value="on" />
+
+  <!-- relative path to the file to log parsing messages, if log is enabled -->
+  <property name="parsing.log.file" value="log.txt" />
+
+  <!-- character set of input CSV data -->
+  <property name="input.encoding" value="UTF-8" />
+
+  <!-- relative path to input CSV data -->
+  <property name="input.csv" value="input/test.csv" />
+  <property name="input.csv.location" location="${input.csv}" />
+
+  <!-- relative path to output folder for converted data -->
+  <property name="output.dir" value="output" />
+
+  <!-- start and end of wrapper code for JSONP output -->
+  <property name="jsonp.start" value="jsonp(" />
+  <property name="jsonp.end" value=");" />
+
+  <import file="macros.xml" />
+
+  <target name="parse"
+    description="Parse and convert CSV to JSON for GIEC tool"
+    depends="init, csv2csvxml, csvxml2jsonxml, jsonxml2jsonp, success"
+  />
+
+  <target name="log" if="parsing.log"
+    description="Log parsing messages to a file"
+  >
+    <record name="${parsing.log.file}" />
+  </target>
+
+  <target name="init" depends="log"
+    description="Create temporary output folder"
+  >
+    <mkdir dir="${output.dir}" />
+  </target>
+
+  <target name="clean" depends="log"
+    description="Delete temporary output folder"
+  >
+    <delete quiet="true" dir="${output.dir}" />
+  </target>
+
+  <target name="success" depends="log"
+    description="Print success message when parsing completes"
+  >
+    <echo message="Parsing completed successfully." />
+  </target>
+
+  <target name="csv2csvxml" depends="log"
+    description="Convert CSV Text to CSV XML"
+  >
+    <saxon xml="xslt/csv2csvxml.xsl"
+           xsl="xslt/csv2csvxml.xsl"
+           out="${output.dir}/csv.xml"
+    >
+      <args>
+        <arg line="encoding=${input.encoding}" />
+        <arg line="csv=${input.location}" />
+      </args>
+    </saxon>
+  </target>
+
+  <target name="csvxml2jsonxml" depends="log"
+    description="Convert CSV XML to JSON XML"
+  >
+    <saxon xml="${output.dir}/csv.xml"
+           xsl="xslt/csvxml2jsonxml.xsl"
+           out="${output.dir}/json.xml"
+    />
+  </target>
+
+  <target name="jsonxml2jsonp" depends="log"
+    description="Convert JSON XML to JSONP"
+  >
+    <saxon xml="${output.dir}/json.xml"
+           xsl="xslt/jsonxml2jsonp.xsl"
+           out="${output.dir}/jsonp.js"
+    >
+      <args>
+        <arg line="wrapperStart='${jsonp.start}'" />
+        <arg line="wrapperEnd='${jsonp.end}'" />
+      </args>
+    </saxon>
+  </target>
+
+</project>

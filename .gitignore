@@ -1,0 +1,5 @@
+# ignore generated output folder
+output/
+
+# ignore parsing log
+log.txt

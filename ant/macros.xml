@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="macros">
+  <!--
+    Ant macro for Saxon XSLT Processor
+    Extracted from: "Useful macros to generate optimized websites"
+
+    Author: Eric Bréchemier
+    License: http://creativecommons.org/licenses/by/4.0/
+    Version: 2014-03-11
+  -->
+
+  <!--
+    parent folder of macros.xml,
+    for resolution of relative paths when macros.xml is imported
+  -->
+  <dirname property="macros.basedir" file="${ant.file.macros}" />
+
+  <!-- list of parameters used, with default values -->
+
+  <!-- maximum memory allocated to java virtual machine running saxon,
+       in megabytes -->
+  <property name="saxon.maxmemory.mb" value="512" />
+
+  <macrodef name="saxon" description="Transform XML using XSLT">
+    <attribute name="xml" />
+    <attribute name="xsl" />
+    <attribute name="out" />
+    <element name="args" optional="yes"/>
+    <sequential>
+      <java classpath="${macros.basedir}/lib/saxon9he.jar"
+        classname="net.sf.saxon.Transform"
+        fork="true" maxmemory="${saxon.maxmemory.mb}m"
+        failonerror="true"
+      >
+        <!-- Notes:
+        1 - use of fork="true" is required to avoid error
+            "SAXParserFactoryImpl not found"
+        2 - replaced <arg value="..." with <arg line="...",
+            the former resulting in empty content
+        -->
+        <arg line="-s:@{xml}"/>
+        <arg line="-xsl:@{xsl}"/>
+        <arg line="-o:@{out}"/>
+        <!-- debug: trace execution -->
+        <!--arg line="-T"/-->
+        <!-- enable profiling and generate report in HTML format -->
+        <!--arg line="-TP:@{xsl}.profile.html"/-->
+        <!-- display the optimized execution plan for the stylesheet -->
+        <!--arg line="-explain:@{xsl}.explained.xml" /-->
+        <!-- additional args for params and specific configs -->
+        <args />
+      </java>
+    </sequential>
+  </macrodef>
+
+</project>
