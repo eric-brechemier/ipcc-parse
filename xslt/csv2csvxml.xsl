@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns="http://eric.brechemier.name#csv"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   exclude-result-prefixes="xs"
   version="2.0"
@@ -38,25 +39,25 @@
       name="csvText"
       select="unparsed-text($csv, $encoding)"
     />
-    <table>
+    <records>
       <xsl:analyze-string select="$csvText" regex="\n">
         <xsl:non-matching-substring>
-          <row>
+          <record>
             <xsl:analyze-string
               select="."
               regex='("([^"]*?)")|([^,]+?),'
             >
               <xsl:matching-substring>
-                <cell>
+                <field>
                    <xsl:value-of select="regex-group(2)" />
                    <xsl:value-of select="regex-group(3)" />
-                </cell>
+                </field>
               </xsl:matching-substring>
             </xsl:analyze-string>
-          </row>
+          </record>
         </xsl:non-matching-substring>
       </xsl:analyze-string>
-    </table>
+    </records>
   </xsl:template>
 
 </xsl:stylesheet>
