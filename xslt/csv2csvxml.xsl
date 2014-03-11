@@ -10,6 +10,9 @@
   Convert a text file in Comma-Separated Format (CSV)
   to a similar structure in XML format
 
+  WARNING: at this point, this conversion does not support escaping
+  of double quotes within quoted values, e.g., "escaped "" in quoted value".
+
   Input: Any XML (e.g., the stylesheet itself)
   Input Parameters:
     * csv - string, path to the input CSV file,
@@ -43,6 +46,10 @@
       <xsl:analyze-string select="$csvText" regex="\n">
         <xsl:non-matching-substring>
           <record>
+            <!--
+            TODO: allow escaping of double quotes within quoted values,
+            e.g., "escaped "" in quoted value".
+            -->
             <xsl:analyze-string
               select="."
               regex='("([^"]*?)")|([^,]+?)(,|$)'
