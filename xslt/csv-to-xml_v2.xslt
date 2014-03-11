@@ -28,7 +28,7 @@
   Version: 2014-03-11
   -->
 
-  <xsl:output indent="yes" encoding="US-ASCII"/>
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
   <xsl:param name="pathToCSV" select="'file:///c:/csv.csv'"/>
 
