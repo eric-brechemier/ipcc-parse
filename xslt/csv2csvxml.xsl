@@ -12,11 +12,11 @@
 
   <xsl:template name="main">
     <xsl:variable
-      name="in"
+      name="csvText"
       select="unparsed-text($csv, $encoding)"
     />
     <table>
-      <xsl:analyze-string select="$in" regex="\n">
+      <xsl:analyze-string select="$csvText" regex="\n">
         <xsl:non-matching-substring>
           <row>
             <xsl:analyze-string
