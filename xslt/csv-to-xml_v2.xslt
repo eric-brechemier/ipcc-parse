@@ -34,7 +34,7 @@
   <xsl:param name="csv" as="xs:string"/>
   <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
 
-  <xsl:function name="csv:getTokens" as="xs:string+">
+  <xsl:function name="csv:getFields" as="xs:string+">
     <xsl:param name="str" as="xs:string"/>
       <xsl:analyze-string
         select="concat($str, ',')"
@@ -54,13 +54,13 @@
       select="tokenize($csvText, '&#xa;')"
     />
     <xsl:variable name="fieldNames" as="xs:string+"
-      select="csv:getTokens($lines[1])"
+      select="csv:getFields($lines[1])"
     />
     <records>
       <xsl:for-each select="$lines[position() > 1]">
         <record>
           <xsl:variable name="lineItems" as="xs:string+"
-            select="csv:getTokens(.)"
+            select="csv:getFields(.)"
           />
 
           <xsl:for-each select="$fieldNames">
