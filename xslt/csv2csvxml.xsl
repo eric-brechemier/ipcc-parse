@@ -43,16 +43,12 @@
       <xsl:analyze-string select="$csvText" regex="\n">
         <xsl:non-matching-substring>
           <record>
-            <xsl:analyze-string
-              select="."
-              regex='("([^"]*?)")|([^,]+?),'
-            >
-              <xsl:matching-substring>
+            <xsl:analyze-string select="." regex=",">
+              <xsl:non-matching-substring>
                 <field>
-                   <xsl:value-of select="regex-group(2)" />
-                   <xsl:value-of select="regex-group(3)" />
+                   <xsl:value-of select="." />
                 </field>
-              </xsl:matching-substring>
+              </xsl:non-matching-substring>
             </xsl:analyze-string>
           </record>
         </xsl:non-matching-substring>
