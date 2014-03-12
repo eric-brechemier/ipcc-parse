@@ -26,7 +26,7 @@
   For the modified stylesheet,
   Author: Eric Bréchemier
   License: http://creativecommons.org/licenses/by/4.0/
-  Version: 2014-03-11
+  Version: 2014-03-12
   -->
 
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
@@ -65,18 +65,20 @@
         </xsl:for-each>
       </record>
       <xsl:for-each select="$records[position() > 1]">
-        <record>
-          <xsl:variable name="fields" as="xs:string+"
-            select="csv:getFields(.)"
-          />
+        <xsl:if test=". ne ''"><!-- skip empty lines, e.g., at end of file -->
+          <record>
+            <xsl:variable name="fields" as="xs:string+"
+              select="csv:getFields(.)"
+            />
 
-          <xsl:for-each select="$fieldNames">
-            <xsl:variable name="fieldPosition" select="position()"/>
-            <field name="{.}">
-              <xsl:value-of select="$fields[$fieldPosition]"/>
-            </field>
-          </xsl:for-each>
-        </record>
+            <xsl:for-each select="$fieldNames">
+              <xsl:variable name="fieldPosition" select="position()"/>
+              <field name="{.}">
+                <xsl:value-of select="$fields[$fieldPosition]"/>
+              </field>
+            </xsl:for-each>
+          </record>
+        </xsl:if>
       </xsl:for-each>
     </records>
   </xsl:template>
