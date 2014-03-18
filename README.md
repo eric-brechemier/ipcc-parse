@@ -1,5 +1,5 @@
 # GIEC Parse
-Parse and convert data for GIEC tool from CSV to JSON
+Parse and convert data for IPCC tool from CSV to JSON
 
 ## Language
 

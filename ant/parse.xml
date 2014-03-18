@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="giec.parse" basedir=".." default="parse">
   <!--
-    Ant script to parse and convert data for GIEC tool
+    Ant script to parse and convert data for IPCC tool
 
     Adapted from:
     "Build script to generate optimized pages for mangaconseil.com"
