@@ -8,7 +8,7 @@
 
     Author: Eric Bréchemier
     License: http://creativecommons.org/licenses/by/4.0/
-    Version: 2014-03-11
+    Version: 2014-03-18
   -->
 
   <!-- override defaults locally -->
@@ -22,12 +22,15 @@
   <!-- relative path to the file to log parsing messages, if log is enabled -->
   <property name="parsing.log.file" value="log.txt" />
 
-  <!-- character set of input CSV data -->
-  <property name="input.csv.encoding" value="UTF-8" />
+  <!-- input file format, in lower case: 'csv' or 'tsv' -->
+  <property name="input.file.type" value="'csv'" />
 
-  <!-- relative path to input CSV data -->
-  <property name="input.csv" value="input/test.csv" />
-  <property name="input.csv.location" location="${input.csv}" />
+  <!-- character set of input data -->
+  <property name="input.file.encoding" value="UTF-8" />
+
+  <!-- relative path to input data -->
+  <property name="input.file" value="input/test.csv" />
+  <property name="input.file.location" location="${input.file}" />
 
   <!-- relative path to output folder for converted data -->
   <property name="output.dir" value="output" />
@@ -43,8 +46,12 @@
   <import file="macros.xml" />
 
   <target name="parse"
-    description="Parse and convert CSV to JSON for GIEC tool"
-    depends="init, csv2csvxml, csvxml2jsonxml, jsonxml2jsonp, export, success"
+    description="Parse and convert CSV/TSV to JSON for IPCC tool"
+    depends="
+      init,
+      input2csvxml, csvxml2jsonxml, jsonxml2jsonp,
+      export, success
+    "
   />
 
   <target name="log" if="parsing.log"
@@ -71,16 +78,16 @@
     <echo message="Parsing completed successfully." />
   </target>
 
-  <target name="csv2csvxml" depends="log"
-    description="Convert CSV Text to CSV XML"
+  <target name="input2csvxml" depends="log"
+    description="Convert CSV/TSV Text to CSV XML"
   >
-    <saxon xml="xslt/csv2csvxml.xsl"
-           xsl="xslt/csv2csvxml.xsl"
+    <saxon xml="xslt/${input.file.type}2csvxml.xsl"
+           xsl="xslt/${input.file.type}2csvxml.xsl"
            out="${output.dir}/csv.xml"
     >
       <args>
-        <arg line="encoding=${input.csv.encoding}" />
-        <arg line="csv=${input.csv.location}" />
+        <arg line="encoding=${input.file.encoding}" />
+        <arg line="csv=${input.file.location}" />
       </args>
     </saxon>
   </target>
