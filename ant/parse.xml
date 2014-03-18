@@ -87,7 +87,7 @@
     >
       <args>
         <arg line="encoding=${input.file.encoding}" />
-        <arg line="csv=${input.file.location}" />
+        <arg line="path=${input.file.location}" />
       </args>
     </saxon>
   </target>

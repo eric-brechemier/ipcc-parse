@@ -12,8 +12,8 @@
 
   Input: Any XML (e.g., the stylesheet itself)
   Input Parameters:
-    * csv - string, path to the input CSV file,
-            absolute or relative to the stylesheet
+    * path - string, path to the input CSV file,
+             absolute or relative to the stylesheet
     * encoding - optional, string, character encoding of the input CSV file,
                  defaults to 'UTF-8'
 
@@ -26,12 +26,12 @@
   For the modified stylesheet,
   Author: Eric Bréchemier
   License: http://creativecommons.org/licenses/by/4.0/
-  Version: 2014-03-12
+  Version: 2014-03-18
   -->
 
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
 
-  <xsl:param name="csv" as="xs:string"/>
+  <xsl:param name="path" as="xs:string"/>
   <xsl:param name="encoding" as="xs:string" select="'UTF-8'" />
 
   <xsl:function name="csv:getFields" as="xs:string+">
@@ -49,7 +49,7 @@
   </xsl:function>
 
   <xsl:template match="/" name="main">
-    <xsl:variable name="csvText" select="unparsed-text($csv, $encoding)"/>
+    <xsl:variable name="csvText" select="unparsed-text($path, $encoding)"/>
     <xsl:variable name="records" as="xs:string+"
       select="tokenize($csvText, '&#xa;')"
     />
