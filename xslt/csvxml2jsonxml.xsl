@@ -24,7 +24,7 @@
 
   Author: Eric Bréchemier
   License: http://creativecommons.org/licenses/by/4.0/
-  Version: 2014-03-11
+  Version: 2014-03-18
   -->
 
   <xsl:output method="xml" encoding="UTF-8" indent="yes" />
@@ -42,9 +42,22 @@
   </xsl:template>
 
   <xsl:template match="csv:field">
-    <json:string>
-      <xsl:value-of select="." />
-    </json:string>
+    <xsl:analyze-string select="." regex="^\[(.+)\]$">
+      <xsl:matching-substring>
+        <json:array>
+          <xsl:for-each select="tokenize( regex-group(1), '\|' )">
+            <json:string>
+              <xsl:value-of select="." />
+            </json:string>
+          </xsl:for-each>
+        </json:array>
+      </xsl:matching-substring>
+      <xsl:non-matching-substring>
+        <json:string>
+          <xsl:value-of select="." />
+        </json:string>
+      </xsl:non-matching-substring>
+    </xsl:analyze-string>
   </xsl:template>
 
 </xsl:transform>
