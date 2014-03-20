@@ -8,7 +8,7 @@
 
     Author: Eric Bréchemier
     License: http://creativecommons.org/licenses/by/4.0/
-    Version: 2014-03-18
+    Version: 2014-03-20
   -->
 
   <!-- override defaults locally -->
@@ -42,6 +42,7 @@
   <!-- relative path for export of the JSONP script -->
   <!-- Note: no export is performed with this default value -->
   <property name="export.jsonp" value="output/jsonp.js" />
+  <property name="export.jsonp.location" location="${export.jsonp}" />
 
   <import file="macros.xml" />
 
@@ -81,6 +82,7 @@
   <target name="input2csvxml" depends="log"
     description="Convert CSV/TSV Text to CSV XML"
   >
+    <echo message="Convert input file '${input.file.location}'" />
     <saxon xml="xslt/${input.file.type}2csvxml.xsl"
            xsl="xslt/${input.file.type}2csvxml.xsl"
            out="${output.dir}/csv.xml"
@@ -118,7 +120,8 @@
   <target name="export" depends="log"
     description="Export the output JSONP script"
   >
-    <copy file="${output.dir}/jsonp.js" tofile="${export.jsonp}" />
+    <echo message="Export converted file to '${export.jsonp.location}'" />
+    <copy file="${output.dir}/jsonp.js" tofile="${export.jsonp.location}" />
   </target>
 
 </project>
