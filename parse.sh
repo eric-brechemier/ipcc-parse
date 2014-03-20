@@ -10,7 +10,15 @@
 # change to the script's directory
 cd $(dirname $0)
 
+parse()
+{
+  ant -f ant/parse.xml -propertyfile "config/$1.properties"
+}
+
 echo 'Parse Authors'
-ant -f ant/parse.xml -propertyfile config/authors.properties
+parse authors
+
+echo 'Parse Working Group Categories'
+parse working-group-categories
 
 echo 'Parsing Complete'
