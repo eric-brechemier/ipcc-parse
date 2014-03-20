@@ -50,7 +50,7 @@
     "
   >
     <xsl:variable name="list" as="xs:string"
-      select="substring(., 2, string-length(.) - 1)"
+      select="substring(., 2, string-length(.) - 2)"
     />
     <json:array>
       <xsl:for-each select="tokenize($list, '\|' )">
