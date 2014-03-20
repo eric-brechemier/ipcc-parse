@@ -41,23 +41,30 @@
     </json:array>
   </xsl:template>
 
-  <xsl:template match="csv:field">
-    <xsl:analyze-string select="." regex="^\[(.+)\]$">
-      <xsl:matching-substring>
-        <json:array>
-          <xsl:for-each select="tokenize( regex-group(1), '\|' )">
-            <json:string>
-              <xsl:value-of select="." />
-            </json:string>
-          </xsl:for-each>
-        </json:array>
-      </xsl:matching-substring>
-      <xsl:non-matching-substring>
+  <xsl:template
+    match="
+      csv:field[
+        starts-with(.,'[')
+        and ends-with(.,']')
+      ]
+    "
+  >
+    <xsl:variable name="list" as="xs:string"
+      select="substring(., 2, string-length(.) - 1)"
+    />
+    <json:array>
+      <xsl:for-each select="tokenize($list, '\|' )">
         <json:string>
           <xsl:value-of select="." />
         </json:string>
-      </xsl:non-matching-substring>
-    </xsl:analyze-string>
+      </xsl:for-each>
+    </json:array>
+  </xsl:template>
+
+  <xsl:template match="csv:field">
+    <json:string>
+      <xsl:value-of select="." />
+    </json:string>
   </xsl:template>
 
 </xsl:transform>
