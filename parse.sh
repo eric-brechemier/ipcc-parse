@@ -17,7 +17,7 @@ outputFolder='../../web/ipcc.projetmedea.fr/data'
 cd $(dirname $0)
 
 # create directories for generated configuration files
-mkdir config
+mkdir -p config
 
 createConfig()
 {
