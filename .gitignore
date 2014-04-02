@@ -1,6 +1,9 @@
 # ignore generated output folder
 output/
 
+# ignore generated configuration files
+config/
+
 # ignore user property file
 ant/user.properties
 
