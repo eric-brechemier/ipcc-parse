@@ -45,10 +45,10 @@ parse()
 echo 'Parse Authors'
 parse authors
 
-echo 'Parse Working Group Categories'
-parse working-group-categories
+echo 'Parse Cumulated Working Group Categories'
+parse cumulated-working-group-categories
 
-echo 'Parse Working Group in Assessment Report Cateogies'
-parse working-group-in-assessment-report-categories
+echo 'Parse Cumulated Working Group in Assessment Report Cateogies'
+parse cumulated-working-group-in-assessment-report-categories
 
 echo 'Parsing Complete'
