@@ -57,8 +57,8 @@ parse working-group-categories
 echo 'Parse Assessment Report Categories'
 parse assessment-report-categories
 
-echo 'Parse Institution Type Categories'
-parse institution-type-categories
+echo 'Parse Institution Categories'
+parse institution-categories
 
 echo 'Parse Country Categories'
 parse country-categories
