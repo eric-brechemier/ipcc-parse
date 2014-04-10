@@ -27,7 +27,7 @@
   For the modified stylesheet,
   Author: Eric Bréchemier
   License: http://creativecommons.org/licenses/by/4.0/
-  Version: 2014-03-18
+  Version: 2014-04-10
   -->
 
   <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
@@ -41,13 +41,11 @@
       <xsl:analyze-string select="$tsvText" regex="\n">
         <xsl:non-matching-substring>
           <record>
-            <xsl:analyze-string select="." regex="\t">
-              <xsl:non-matching-substring>
-                <field>
-                  <xsl:value-of select="." />
-                </field>
-              </xsl:non-matching-substring>
-            </xsl:analyze-string>
+            <xsl:for-each select="tokenize(.,'\t')">
+              <field>
+                <xsl:value-of select="." />
+              </field>
+            </xsl:for-each>
           </record>
         </xsl:non-matching-substring>
       </xsl:analyze-string>
