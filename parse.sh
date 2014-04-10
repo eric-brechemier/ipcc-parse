@@ -45,10 +45,10 @@ parse()
 echo 'Parse Authors'
 parse authors
 
-echo 'Parse Total Contributions'
+echo 'Parse Total Contributions Categories'
 parse total-contributions-categories
 
-echo 'Parse Roles'
+echo 'Parse Role Categories'
 parse role-categories
 
 echo 'Parse Working Group Categories'
