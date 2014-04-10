@@ -45,6 +45,9 @@ parse()
 echo 'Parse Authors'
 parse authors
 
+echo 'Parse Total Contributions List'
+parse total-contributions-list
+
 echo 'Parse Total Contributions Categories'
 parse total-contributions-categories
 
