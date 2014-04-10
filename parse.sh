@@ -84,20 +84,36 @@ parse country-list
 echo 'Parse Country Categories'
 parse country-categories
 
+echo 'Parse Country Group Categories'
+parse country-group-categories
+
 echo 'Parse Cumulated Working Group Categories'
 parse cumulated-working-group-categories
 
 echo 'Parse Cumulated Working Group in Assessment Report Categories'
 parse cumulated-working-group-in-assessment-report-categories
 
+echo 'Parse Cumulated Working Group in Country Group Categories'
+parse cumulated-working-group-in-country-group-categories
+
+echo 'Parse Cumulated Working Group in Institution Type Categories'
+parse cumulated-working-group-in-institution-type-categories
+
 echo 'Parse Chapter in Working Group in Assessment Report Categories'
 parse chapter-in-working-group-in-assessment-report-categories
 
+# TODO: DELETE (no longer used)
 echo 'Parse Country and Working Group Categories'
 parse country-and-working-group-categories
 
 echo 'Parse Role in Working Group Categories'
 parse role-in-working-group-categories
+
+echo 'Parse Cumulated Role in Assessment Report Categories'
+parse cumulated-role-in-assessment-report-categories
+
+echo 'Parse Cumulated Role in Country Group Categories'
+parse cumulated-role-in-country-group-categories
 
 echo 'Parse Discipline in Working Group Categories'
 parse discipline-in-working-group-categories
