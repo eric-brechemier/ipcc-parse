@@ -51,6 +51,9 @@ parse total-contributions-list
 echo 'Parse Total Contributions Categories'
 parse total-contributions-categories
 
+echo 'Parse Role List'
+parse role-list
+
 echo 'Parse Role Categories'
 parse role-categories
 
@@ -86,6 +89,9 @@ parse discipline-in-working-group-categories
 
 echo 'Parse Type of Institution in Working Group Categories'
 parse institution-type-in-working-group-categories
+
+echo 'Parse Assessment Report List'
+parse assessment-report-list
 
 echo 'Parse Years of Assessment Reports'
 parse assessment-report-years
