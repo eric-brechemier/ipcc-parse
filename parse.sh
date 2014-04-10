@@ -72,6 +72,9 @@ parse assessment-report-categories
 echo 'Parse Years of Assessment Reports'
 parse assessment-report-years
 
+echo 'Parse Institution List'
+parse institution-list
+
 echo 'Parse Institution Categories'
 parse institution-categories
 
