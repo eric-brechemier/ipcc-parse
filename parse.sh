@@ -60,8 +60,14 @@ parse role-categories
 echo 'Parse Working Group Categories'
 parse working-group-categories
 
+echo 'Parse Assessment Report List'
+parse assessment-report-list
+
 echo 'Parse Assessment Report Categories'
 parse assessment-report-categories
+
+echo 'Parse Years of Assessment Reports'
+parse assessment-report-years
 
 echo 'Parse Institution Categories'
 parse institution-categories
@@ -89,11 +95,5 @@ parse discipline-in-working-group-categories
 
 echo 'Parse Type of Institution in Working Group Categories'
 parse institution-type-in-working-group-categories
-
-echo 'Parse Assessment Report List'
-parse assessment-report-list
-
-echo 'Parse Years of Assessment Reports'
-parse assessment-report-years
 
 echo 'Parsing Complete'
