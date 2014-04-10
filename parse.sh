@@ -57,6 +57,9 @@ parse role-list
 echo 'Parse Role Categories'
 parse role-categories
 
+echo 'Parse Working Group List'
+parse working-group-list
+
 echo 'Parse Working Group Categories'
 parse working-group-categories
 
