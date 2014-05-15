@@ -78,6 +78,9 @@ parse institution-list
 echo 'Parse Institution Categories'
 parse institution-categories
 
+echo 'Parse Institution Type List'
+parse institution-type-list
+
 echo 'Parse Institution Type Categories'
 parse institution-type-categories
 
